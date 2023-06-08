@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class ProfilePage extends BasePage<ProfilePage> {
 
-    public final static String URL = "profile";
+    public final static String URL = "/profile";
 
     final SelenideElement
             profileAvatar = $("profile__avatar"),

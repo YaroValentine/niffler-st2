@@ -8,7 +8,6 @@ import niffler.jupiter.annotation.WebTest;
 public abstract class BaseWebTest {
     protected static final Config CFG = Config.getConfig();
 
-
     static {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = CFG.getFrontUrl();

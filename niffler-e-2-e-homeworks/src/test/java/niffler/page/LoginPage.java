@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPage extends BasePage<LoginPage> {
 
-    public final static String URL = "login";
+    public final static String URL = "/login";
 
     private final SelenideElement
             loginBtn = $(byText("Login")),

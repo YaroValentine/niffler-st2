@@ -14,7 +14,7 @@ public class OauthUtils {
     }
 
     public static String generateCodeChallenge(String codeVerifier) {
-        byte[] bytes = new byte[0];
+        byte[] bytes;
         try {
             bytes = codeVerifier.getBytes("US-ASCII");
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");

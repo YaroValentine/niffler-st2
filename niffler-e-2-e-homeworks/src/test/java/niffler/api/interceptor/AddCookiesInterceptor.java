@@ -2,6 +2,7 @@ package niffler.api.interceptor;
 
 import niffler.api.context.CookieContext;
 import okhttp3.Headers;
+import okhttp3.Headers.Builder;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -18,7 +19,7 @@ public class AddCookiesInterceptor implements Interceptor {
         String cookieXsrf = cookieContext.getCookie("XSRF-TOKEN");
         String jsessionId = cookieContext.getCookie("JSESSIONID");
 
-        final Headers.Builder builder = originalRequest.headers().newBuilder();
+        final Builder builder = originalRequest.headers().newBuilder();
         builder.removeAll("Cookie");
         if (jsessionId != null) {
             builder.add("Cookie", "JSESSIONID=" + jsessionId);

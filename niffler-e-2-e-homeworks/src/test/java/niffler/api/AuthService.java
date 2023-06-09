@@ -18,7 +18,7 @@ public interface AuthService {
     // &code_challenge=V48NCt3SmmbGcFvkMX6hYFeiwfqejzZitIV2ucjcfqA
     // &code_challenge_method=S256
     // --------------------------------------------------------------
-    @GET("/authorize")
+    @GET("/oauth2/authorize")
     Call<Void> authorize(
             @Query("response_type") String responseType,
             @Query("client_id") String clientId,
@@ -76,7 +76,7 @@ public interface AuthService {
     //    codeChallenge	OVOuNAVMsF37vcWfqC9jtlfArWwXnDSdlvp32G8unB8
     //    id_token	eyJraWQiOiIwYmUzZjY3ZS0wODdmLTQ2YzUtYTdjYi1mNzhiNDE5OThjZDAiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjkwMDAiLCJzdWIiOiJ5YXJvIiwiYXVkIjoiY2xpZW50IiwiZXhwIjoxNjg2MjQxODgzLCJpYXQiOjE2ODYyNDAwODMsImF6cCI6ImNsaWVudCJ9.PCyq5nu7Id4gTeN1xNqP_fD6KXnVrnyEHTPMC4fjIbsZRPRl_vjjFv6rJBW1Def4VJTowsBICrMl-202rebXWtDB_WQEi7hL95Hc5JbpQxBs3jyvzqoGQtvHhjXX8J-mfNkOqZmF4btkq9lXVGflH6EwrWJqJfNcBhyyeIisznONpshNkb448WOwmKnLvZHGKMGRVi_Z1pjg5bW7rCwG-yzjiyTWTD2KEBOYfedI8_FcjT4lzOw8zKG4I8LQ-3UWkTHIkIfjRAwk664iA5eADdNvHflE1UWl8i-5Z4G25VNCKM_AjTwq63uDg3NP9Yiq4t0ENa8rRo-nnhooPnqD2g
     //    codeVerifier	viCROgbZPN7fQYcmIRZ_GNmDOVV6R2-MfRSRWkAqQCk
-    @POST("/oauth/token")
+    @POST("/oauth2/token")
     Call<JsonNode> token(
             @Header("Authorization") String authorization,
             @Query("client_id") String clientId,

@@ -6,6 +6,7 @@ import niffler.api.interceptor.AddCookiesInterceptor;
 import niffler.api.interceptor.ReceivedCodeInterceptor;
 import niffler.api.interceptor.RecievedCookiesInterceptor;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
@@ -28,11 +29,11 @@ public class AuthClient extends BaseRestClient {
                     "code",
                     "client",
                     "openid",
-                    CFG.getAuthUrl() + "/authorized",
+                    CFG.getFrontUrl() + "/authorized",
                     SessionContext.getInstance().getCodeChallenge(),
                     "S256"
             ).execute();
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -44,9 +45,11 @@ public class AuthClient extends BaseRestClient {
             authService.login(
                     cookieContext.getFormattedCookie("JSESSIONID"),
                     cookieContext.getFormattedCookie("XSRF-TOKEN"),
-                    cookieContext.getCookie("XSRF-TOKEN"), username, password
+                    cookieContext.getCookie("XSRF-TOKEN"),
+                    username,
+                    password
             ).execute();
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -63,7 +66,7 @@ public class AuthClient extends BaseRestClient {
                     sessionContext.getCode(),
                     sessionContext.getCodeVerifier()
             ).execute().body().get("id_token").asText();
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

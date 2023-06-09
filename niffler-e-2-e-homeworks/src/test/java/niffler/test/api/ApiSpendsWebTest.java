@@ -17,11 +17,6 @@ import static com.codeborne.selenide.Selenide.open;
 
 @ExtendWith(GenerateSpendExtension.class)
 public class ApiSpendsWebTest extends BaseWebTest {
-    @BeforeEach
-    void doLogin() {
-        open(MainPage.URL, LoginPage.class)
-                .doLogin("yaro", "secret");
-    }
 
     @GenerateSpend(
             username = "yaro",
@@ -37,6 +32,7 @@ public class ApiSpendsWebTest extends BaseWebTest {
         open(MainPage.URL, MainPage.class)
                 .deleteSpending(spend.getDescription());
     }
+
 }
 
 

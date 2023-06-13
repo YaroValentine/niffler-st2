@@ -49,7 +49,7 @@ public class AuthClient extends BaseRestClient {
                     username,
                     password
             ).execute();
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -66,9 +66,11 @@ public class AuthClient extends BaseRestClient {
                     sessionContext.getCode(),
                     sessionContext.getCodeVerifier()
             ).execute().body().get("id_token").asText();
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+
 
 }

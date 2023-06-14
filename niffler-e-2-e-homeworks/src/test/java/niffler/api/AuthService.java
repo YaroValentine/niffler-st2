@@ -1,6 +1,7 @@
 package niffler.api;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import niffler.model.UserJson;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -27,7 +28,6 @@ public interface AuthService {
             @Query("code_challenge") String codeChallenge,
             @Query("code_challenge_method") String codeChallengeMethod
     );
-
     // RESPONSE:
     //                  0.1) 302 - http://127.0.0.1:9000/login
     //                  0.2) Set-Cookie: JSESSIONID=D6D863AA1D342A7AECBC5B6C148774A6; Path=/
@@ -76,6 +76,7 @@ public interface AuthService {
     //    codeChallenge	OVOuNAVMsF37vcWfqC9jtlfArWwXnDSdlvp32G8unB8
     //    id_token	eyJraWQiOiIwYmUzZjY3ZS0wODdmLTQ2YzUtYTdjYi1mNzhiNDE5OThjZDAiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjkwMDAiLCJzdWIiOiJ5YXJvIiwiYXVkIjoiY2xpZW50IiwiZXhwIjoxNjg2MjQxODgzLCJpYXQiOjE2ODYyNDAwODMsImF6cCI6ImNsaWVudCJ9.PCyq5nu7Id4gTeN1xNqP_fD6KXnVrnyEHTPMC4fjIbsZRPRl_vjjFv6rJBW1Def4VJTowsBICrMl-202rebXWtDB_WQEi7hL95Hc5JbpQxBs3jyvzqoGQtvHhjXX8J-mfNkOqZmF4btkq9lXVGflH6EwrWJqJfNcBhyyeIisznONpshNkb448WOwmKnLvZHGKMGRVi_Z1pjg5bW7rCwG-yzjiyTWTD2KEBOYfedI8_FcjT4lzOw8zKG4I8LQ-3UWkTHIkIfjRAwk664iA5eADdNvHflE1UWl8i-5Z4G25VNCKM_AjTwq63uDg3NP9Yiq4t0ENa8rRo-nnhooPnqD2g
     //    codeVerifier	viCROgbZPN7fQYcmIRZ_GNmDOVV6R2-MfRSRWkAqQCk
+    // ----------------------------------------------------------------
     @POST("/oauth2/token")
     Call<JsonNode> token(
             @Header("Authorization") String authorization,
@@ -84,6 +85,19 @@ public interface AuthService {
             @Query("grant_type") String grantType,
             @Query("code") String code,
             @Query("code_verifier") String codeVerifier
+    );
+
+    @GET("/register")
+    Call<Void> register();
+
+    @POST("/register")
+    @FormUrlEncoded
+    Call<Void> signUp(
+            @Header("Cookie") String xsrfCookie,
+            @Field("_csrf") String xsrf,
+            @Field("username") String username,
+            @Field("password") String password,
+            @Field("passwordSubmit") String passwordSubmit
     );
 
 }

@@ -18,6 +18,7 @@ import static com.codeborne.selenide.Selenide.open;
 @ExtendWith(GenerateSpendExtension.class)
 public class ApiSpendsWebTest extends BaseWebTest {
 
+    @AllureId("101")
     @GenerateSpend(
             username = "yaro",
             description = "QA GURU ADVANCED VOL 2",
@@ -26,7 +27,6 @@ public class ApiSpendsWebTest extends BaseWebTest {
             category = "learning"
     )
     @ApiLogin(username = "yaro", password = "secret")
-    @AllureId("101")
     @Test
     void spendShouldBeDeletedByActionInTable(SpendJson spend) {
         open(MainPage.URL, MainPage.class)
@@ -34,5 +34,3 @@ public class ApiSpendsWebTest extends BaseWebTest {
     }
 
 }
-
-

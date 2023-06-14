@@ -15,7 +15,8 @@ public class AuthClient extends BaseRestClient {
     private final AuthService authService = retrofit.create(AuthService.class);
 
     public AuthClient() {
-        super(CFG.getAuthUrl(),
+        super(
+                CFG.getAuthUrl(),
                 true,
                 new RecievedCookiesInterceptor(),
                 new AddCookiesInterceptor(),
@@ -71,6 +72,21 @@ public class AuthClient extends BaseRestClient {
         }
     }
 
+    public void signUp(String username, String password) {
+        final CookieContext cookieContext = CookieContext.getInstance();
 
+        try {
+            authService.register().execute();
+            authService.signUp(
+                    cookieContext.getFormattedCookie("XSRF-TOKEN"),
+                    cookieContext.getCookie("XSRF-TOKEN"),
+                    username,
+                    password,
+                    password
+            ).execute();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

@@ -1,8 +1,7 @@
 package niffler.test.ui;
 
 import io.qameta.allure.AllureId;
-import niffler.api.UserService;
-import niffler.cycles.BaseTest;
+import niffler.api.UserdataService;
 import niffler.jupiter.annotation.ClasspathUser;
 import niffler.model.UserJson;
 import niffler.page.LoginPage;
@@ -31,7 +30,7 @@ public class UpdateUserInfoTest extends BaseWebTest {
             .addConverterFactory(JacksonConverterFactory.create())
             .build();
 
-    private final UserService userService = retrofit.create(UserService.class);
+    private final UserdataService userService = retrofit.create(UserdataService.class);
 
     @AllureId("80")
     @ValueSource(strings = {

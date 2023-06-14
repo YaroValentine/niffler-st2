@@ -20,6 +20,10 @@ public abstract class BaseRestClient {
         this(serviceBaseUrl, false, null);
     }
 
+    public BaseRestClient(String serviceBaseUrl, boolean followRedirect) {
+        this(serviceBaseUrl, followRedirect, null);
+    }
+
     public BaseRestClient(String serviceBaseUrl, boolean followRedirect, Interceptor... interceptors) {
         this.serviceBaseUrl = serviceBaseUrl;
         OkHttpClient.Builder builder = new OkHttpClient.Builder()

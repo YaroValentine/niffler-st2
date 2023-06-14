@@ -1,9 +1,6 @@
 package niffler.jupiter.annotation;
 
-import niffler.jupiter.extensions.ApiLoginExtension;
-import niffler.jupiter.extensions.BrowserExtension;
-import niffler.jupiter.extensions.GenerateUserHibernateExtension;
-import niffler.jupiter.extensions.GenerateUserJdbcExtension;
+import niffler.jupiter.extensions.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.lang.annotation.ElementType;
@@ -15,9 +12,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @ExtendWith({
         BrowserExtension.class,
+        GenerateUserApiExtension.class,
         GenerateUserJdbcExtension.class,
         GenerateUserHibernateExtension.class,
-        ApiLoginExtension.class
+        ApiLoginExtension.class,
 })
 public @interface WebTest {
 

@@ -2,7 +2,6 @@ package niffler.test.api;
 
 import io.qameta.allure.AllureId;
 import niffler.jupiter.annotation.GenerateUserWithApi;
-import niffler.model.SpendJson;
 import niffler.model.UserJson;
 import niffler.page.LoginPage;
 import niffler.page.MainPage;

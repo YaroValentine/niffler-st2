@@ -1,13 +1,9 @@
 package niffler.jupiter.extensions;
 
 import niffler.api.SpendRestClient;
-import niffler.api.SpendService;
 import niffler.jupiter.annotation.GenerateSpend;
 import niffler.model.SpendJson;
-import okhttp3.OkHttpClient;
 import org.junit.jupiter.api.extension.*;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.util.Date;
 

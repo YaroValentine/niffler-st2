@@ -17,7 +17,7 @@ public class BrowserExtension implements TestExecutionExceptionHandler, AfterEac
         if (WebDriverRunner.hasWebDriverStarted()) {
             Allure.addAttachment("Screenshot on failure",
                     new ByteArrayInputStream(((TakesScreenshot) WebDriverRunner.getWebDriver())
-                                    .getScreenshotAs(OutputType.BYTES))
+                            .getScreenshotAs(OutputType.BYTES))
             );
         }
         throw throwable;

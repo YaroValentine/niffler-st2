@@ -1,14 +1,12 @@
 package niffler.jupiter.extensions;
 
 import niffler.api.SpendRestClient;
-import niffler.jupiter.annotation.GenerateCategory;
 import niffler.jupiter.annotation.GenerateSpend;
 import niffler.model.CategoryJson;
 import niffler.model.SpendJson;
 import org.junit.jupiter.api.extension.*;
 
 import java.util.Date;
-import java.util.Optional;
 
 
 public class GenerateSpendAndCategoryExtensionTest implements ParameterResolver, BeforeEachCallback {

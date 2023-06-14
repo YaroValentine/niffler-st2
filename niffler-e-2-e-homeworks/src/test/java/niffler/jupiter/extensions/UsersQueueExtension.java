@@ -1,7 +1,7 @@
 package niffler.jupiter.extensions;
 
-import niffler.jupiter.annotation.User;
 import io.qameta.allure.AllureId;
+import niffler.jupiter.annotation.User;
 import niffler.model.UserJson;
 import org.junit.jupiter.api.extension.*;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;

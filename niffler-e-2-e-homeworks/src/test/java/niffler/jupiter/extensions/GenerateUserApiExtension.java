@@ -5,7 +5,6 @@ import io.qameta.allure.AllureId;
 import niffler.api.AuthClient;
 import niffler.api.UserdataClient;
 import niffler.jupiter.annotation.GenerateUserWithApi;
-import niffler.model.SpendJson;
 import niffler.model.UserJson;
 import org.junit.jupiter.api.extension.*;
 
@@ -25,7 +24,7 @@ public class GenerateUserApiExtension implements BeforeEachCallback, ParameterRe
             UserJson user = new UserJson();
             if (annotation.username().equals("") && annotation.password().equals("")) {
                 user.setUsername(faker.name().username());
-                user.setPassword(faker.internet().password());
+                user.setPassword(faker.internet().password(5, 8, false, false));
             } else {
                 user.setUsername(annotation.username());
                 user.setPassword(annotation.password());

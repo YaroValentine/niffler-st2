@@ -16,6 +16,8 @@ public class ApiGenerateUserTest extends BaseWebTest {
     @AllureId("501")
     @Test
     void apiRegistrationTest(UserJson user) {
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
         open(MainPage.URL, LoginPage.class)
                 .doLogin(user.getUsername(), user.getPassword())
                 .checkThatPageLoaded();

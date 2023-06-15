@@ -11,17 +11,17 @@ import static java.lang.System.lineSeparator;
 
 public class SpendsMismatch extends UIAssertionError {
 
-  public SpendsMismatch(CollectionSource collection,
-      List<SpendJson> expectedSpends, List<SpendJson> actualSpends,
-      @Nullable String explanation, long timeoutMs) {
-    super(
-        collection.driver(),
-        "Spends mismatch" +
-            lineSeparator() + "Actual: " + actualSpends +
-            lineSeparator() + "Expected: " + expectedSpends +
-            (explanation == null ? "" : lineSeparator() + "Because: " + explanation) +
-            lineSeparator() + "Collection: " + collection.description(),
-        expectedSpends, actualSpends,
-        timeoutMs);
-  }
+    public SpendsMismatch(CollectionSource collection,
+                          List<SpendJson> expectedSpends, List<SpendJson> actualSpends,
+                          @Nullable String explanation, long timeoutMs) {
+        super(
+                collection.driver(),
+                "Spends mismatch" +
+                        lineSeparator() + "Actual: " + actualSpends +
+                        lineSeparator() + "Expected: " + expectedSpends +
+                        (explanation == null ? "" : lineSeparator() + "Because: " + explanation) +
+                        lineSeparator() + "Collection: " + collection.description(),
+                expectedSpends, actualSpends,
+                timeoutMs);
+    }
 }

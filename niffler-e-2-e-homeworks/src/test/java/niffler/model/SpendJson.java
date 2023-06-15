@@ -3,6 +3,7 @@ package niffler.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 public class SpendJson {
@@ -12,27 +13,27 @@ public class SpendJson {
     private Date spendDate;
     @JsonProperty("category")
     private String category;
-  @JsonProperty("currency")
-  private CurrencyValues currency;
-  @JsonProperty("amount")
-  private Double amount;
-  @JsonProperty("description")
-  private String description;
-  @JsonProperty("username")
-  private String username;
+    @JsonProperty("currency")
+    private CurrencyValues currency;
+    @JsonProperty("amount")
+    private Double amount;
+    @JsonProperty("description")
+    private String description;
+    @JsonProperty("username")
+    private String username;
 
-  public SpendJson() {
-  }
+    public SpendJson() {
+    }
 
-  public UUID getId() {
-    return id;
-  }
+    public UUID getId() {
+        return id;
+    }
 
-  public void setId(UUID id) {
-    this.id = id;
-  }
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
-  public Date getSpendDate() {
+    public Date getSpendDate() {
         return spendDate;
     }
 
@@ -89,5 +90,18 @@ public class SpendJson {
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SpendJson spendJson = (SpendJson) o;
+        return Objects.equals(spendDate, spendJson.spendDate) && Objects.equals(category, spendJson.category) && currency == spendJson.currency && Objects.equals(amount, spendJson.amount) && Objects.equals(description, spendJson.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(spendDate, category, currency, amount, description);
     }
 }

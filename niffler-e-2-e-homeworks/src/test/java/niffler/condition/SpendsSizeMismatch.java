@@ -11,19 +11,19 @@ import static java.lang.System.lineSeparator;
 
 public class SpendsSizeMismatch extends UIAssertionError {
 
-  public SpendsSizeMismatch(CollectionSource collection,
-                            List<SpendJson> expectedSpends, List<SpendJson> actualSpends,
-                            @Nullable String explanation, long timeoutMs) {
-    super(
-        collection.driver(),
-        "Spends size mismatch" +
-            lineSeparator() + "Actual: " + actualSpends + ", List size: " + actualSpends.size() +
-            lineSeparator() + "Expected: " + expectedSpends + ", List size: "
-            + expectedSpends.size() +
-            (explanation == null ? "" : lineSeparator() + "Because: " + explanation) +
-            lineSeparator() + "Collection: " + collection.description(),
-        expectedSpends, actualSpends,
-        timeoutMs
-    );
-  }
+    public SpendsSizeMismatch(CollectionSource collection,
+                              List<SpendJson> expectedSpends, List<SpendJson> actualSpends,
+                              @Nullable String explanation, long timeoutMs) {
+        super(
+                collection.driver(),
+                "Spends size mismatch" +
+                        lineSeparator() + "Actual: " + actualSpends + ", List size: " + actualSpends.size() +
+                        lineSeparator() + "Expected: " + expectedSpends + ", List size: "
+                        + expectedSpends.size() +
+                        (explanation == null ? "" : lineSeparator() + "Because: " + explanation) +
+                        lineSeparator() + "Collection: " + collection.description(),
+                expectedSpends, actualSpends,
+                timeoutMs
+        );
+    }
 }

@@ -9,3 +9,4 @@ Added ApiGenerateUserTest.
 
 Added @GenerateUser that creates user via POST to Auth/register
 
+Added GrpcCurrencyServiceTest

@@ -1,5 +1,6 @@
 package niffler.db;
 
+import com.p6spy.engine.spy.P6DataSource;
 import niffler.config.Config;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -18,7 +19,8 @@ public enum DataSourceProvider {
             sds.setURL(serviceDB.getJdbcUrl());
             sds.setUser(Config.getConfig().getDBLogin());
             sds.setPassword(Config.getConfig().getDBPassword());
-            return sds;
+//            return sds;
+            return new P6DataSource(sds);
         });
     }
 }

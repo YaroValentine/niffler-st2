@@ -3,6 +3,7 @@ package niffler.test.db;
 import com.codeborne.selenide.Selenide;
 import niffler.db.dao.NifflerUsersDAO;
 import niffler.db.dao.NifflerUsersDAOHibernate;
+import niffler.db.dao.NifflerUsersDAOSpringJdbc;
 import niffler.db.entity.Authority;
 import niffler.db.entity.AuthorityEntity;
 import niffler.db.entity.UserEntity;
@@ -24,14 +25,14 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class LoginNewUserTest extends BaseWebTest {
 
-    private NifflerUsersDAO usersDAO = new NifflerUsersDAOHibernate();
+    private NifflerUsersDAO usersDAO = new NifflerUsersDAOSpringJdbc();
     private UserEntity userEntity;
     private final static String TEST_PWD = "secret";
 
     @BeforeEach
     void createUserForTest() {
         userEntity = new UserEntity();
-        userEntity.setUsername("valentin6");
+        userEntity.setUsername("valentin9");
         userEntity.setPassword(TEST_PWD);
         userEntity.setEnabled(true);
         userEntity.setAccountNonExpired(true);

@@ -1,7 +1,10 @@
 package niffler.db.logging;
 
+import com.github.vertical_blank.sqlformatter.SqlFormatter;
+import com.github.vertical_blank.sqlformatter.languages.Dialect;
 import com.p6spy.engine.logging.Category;
 import com.p6spy.engine.spy.appender.StdoutLogger;
+import io.qameta.allure.Allure;
 import io.qameta.allure.attachment.AttachmentData;
 import io.qameta.allure.attachment.AttachmentProcessor;
 import io.qameta.allure.attachment.DefaultAttachmentProcessor;
@@ -19,9 +22,23 @@ public class AllureSqlLogger extends StdoutLogger {
         super.logSQL(connectionId, now, elapsed, category, prepared, sql, url);
 
         if (isNotEmpty(sql)) {
-            SqlAttachment sqlAttachment = new SqlAttachment("sql attacment", sql, prepared);
-            attachmentProcessor.addAttachment(sqlAttachment,
-                    new FreemarkerAttachmentRenderer(templatePath));
+            SqlAttachment sqlAttachment = new SqlAttachment(
+                    "SQL statement and query",
+                    SqlFormatter.of(Dialect.StandardSql).format(prepared),
+                    SqlFormatter.of(Dialect.StandardSql).format(sql));
+            attachmentProcessor.addAttachment(sqlAttachment, new FreemarkerAttachmentRenderer(templatePath));
         }
     }
+
+    @Override
+    public void logException(Exception e) {
+        super.logException(e);
+        Allure.addAttachment("Exception stacktrace", e.getMessage());
+    }
+
+    @Override
+    public void logText(String sql) {
+        super.logText(sql);
+    }
+
 }

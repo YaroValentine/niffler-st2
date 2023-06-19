@@ -1,6 +1,7 @@
 package niffler.db;
 
 import niffler.config.Config;
+import org.apache.commons.lang3.StringUtils;
 
 public enum ServiceDB {
 
@@ -22,4 +23,9 @@ public enum ServiceDB {
         );
     }
 
+
+    public String p6SpyUrl() {
+        String baseUrl = getJdbcUrl();
+        return "jdbc:p6spy:" + StringUtils.substringAfter(baseUrl, "jdbc:");
+    }
 }

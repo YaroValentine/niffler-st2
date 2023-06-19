@@ -19,8 +19,9 @@ public class AllureSqlLogger extends StdoutLogger {
         super.logSQL(connectionId, now, elapsed, category, prepared, sql, url);
 
         if (isNotEmpty(sql)) {
-            SqlAttachment sqlAttachment = new SqlAttachment("sql attachment", sql, prepared);
-            attachmentProcessor.addAttachment(sqlAttachment, new FreemarkerAttachmentRenderer(templatePath));
+            SqlAttachment sqlAttachment = new SqlAttachment("sql attacment", sql, prepared);
+            attachmentProcessor.addAttachment(sqlAttachment,
+                    new FreemarkerAttachmentRenderer(templatePath));
         }
     }
 }

@@ -64,7 +64,7 @@ public class AuthRestClient extends BaseRestClient implements AuthClient {
         final SessionContext sessionContext = SessionContext.getInstance();
 
         try {
-            return authService.token(
+            final String token = authService.token(
                     "Basic " + Base64.getEncoder().encodeToString("client:secret".getBytes(StandardCharsets.UTF_8)),
                     "client",
                     CFG.getFrontUrl() + "/authorized",
@@ -72,6 +72,8 @@ public class AuthRestClient extends BaseRestClient implements AuthClient {
                     sessionContext.getCode(),
                     sessionContext.getCodeVerifier()
             ).execute().body().get("id_token").asText();
+            sessionContext.setToken(token);
+            return token;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

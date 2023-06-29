@@ -53,4 +53,13 @@ public class DockerConfig implements Config {
         return "http://niffler-auth:9000";
     }
 
+    @Override
+    public String getUserdataGrpcAddress() {
+        return "niffler-userdata";
+    }
+
+    @Override
+    public int getUserdataGrpcPort() {
+        return 8090;
+    }
 }

@@ -27,4 +27,6 @@ public interface Config {
 
     String getCurrencyGrpcAddress();
     int getCurrencyGrpcPort();
+    String getUserdataGrpcAddress();
+    int getUserdataGrpcPort();
 }

@@ -1,6 +1,14 @@
 package niffler.service;
 
+import com.google.protobuf.ByteString;
+import com.google.protobuf.Empty;
+import guru.qa.grpc.niffler.grpc.Friends;
+import guru.qa.grpc.niffler.grpc.NifflerUserdataServiceGrpc;
+import guru.qa.grpc.niffler.grpc.User;
+import guru.qa.grpc.niffler.grpc.UserResponse;
+import io.grpc.stub.StreamObserver;
 import jakarta.annotation.Nonnull;
+import net.devh.boot.grpc.server.service.GrpcService;
 import niffler.data.CurrencyValues;
 import niffler.data.FriendsEntity;
 import niffler.data.UserEntity;
@@ -14,15 +22,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Component
-public class UserDataService {
+@GrpcService
+public class UserDataService extends NifflerUserdataServiceGrpc.NifflerUserdataServiceImplBase {
 
     private static final CurrencyValues DEFAULT_USER_CURRENCY = CurrencyValues.RUB;
     private final UserRepository userRepository;
@@ -223,4 +227,38 @@ public class UserDataService {
                         : FriendState.FRIEND))
                 .toList();
     }
+
+    @Override
+    public void getAllUsers(Empty request, StreamObserver<UserResponse> responseObserver) {
+        List<UserEntity> all = userRepository.findAll();
+
+        UserResponse response = UserResponse.newBuilder()
+                .addAllUsers(all.stream()
+                        .map(e -> {
+                            return User.newBuilder()
+                                    .setId(e.getId().toString())
+                                    .setUsername(e.getUsername())
+                                    .setCurrency(guru.qa.grpc.niffler.grpc.CurrencyValues.valueOf(e.getCurrency().name()))
+                                    .setFirstname(e.getFirstname() == null ? "" : e.getFirstname())
+                                    .setSurname(e.getSurname() == null ? "" : e.getSurname())
+                                    .setPhoto(e.getPhoto() != null ? ByteString.copyFrom(e.getPhoto()) : ByteString.EMPTY)
+                                    .addAllFriends(e.getFriends().stream().map(this::toFriend).toList())
+                                    .addAllInvites(e.getInvites().stream().map(this::toFriend).toList())
+                                    .build();
+                        })
+                        .toList())
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    private guru.qa.grpc.niffler.grpc.Friends toFriend(FriendsEntity friendsEntity) {
+        return Friends.newBuilder()
+                .setUserId(friendsEntity.getUser().getId().toString())
+                .setFriendId(friendsEntity.getFriend().getId().toString())
+                .setPending(friendsEntity.isPending())
+                .build();
+    }
+
 }

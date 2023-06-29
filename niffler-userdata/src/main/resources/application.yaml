@@ -4,6 +4,11 @@ server:
     include:
       message: true
 
+#    8097 //added by yaro
+grpc:
+  server:
+    port: 8097
+
 spring:
   application:
     name: niffler-userdata

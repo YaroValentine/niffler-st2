@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "niffler-common.proto";
+
+package guru.qa.grpc.niffler;
+
+option java_multiple_files = true;
+option java_package = "guru.qa.grpc.niffler.grpc";
+option java_outer_classname = "NifflerUserdataProto";
+
+service NifflerUserdataService {
+  rpc GetAllUsers (google.protobuf.Empty) returns (UserResponse) {}
+}
+
+message UserResponse {
+  repeated User users = 1;
+}
+
+message User {
+    string id = 1;
+    string username = 2;
+    CurrencyValues currency = 3;
+    string firstname = 4;
+    string surname = 5;
+    bytes photo = 6;
+    repeated Friends friends = 7;
+    repeated Friends invites = 8;
+}
+
+message Friends {
+    string userId = 1;
+    string friendId = 2;
+    bool pending = 3;
+}

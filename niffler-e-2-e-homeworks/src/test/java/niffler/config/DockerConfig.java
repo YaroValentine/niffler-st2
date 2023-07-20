@@ -3,6 +3,11 @@ package niffler.config;
 
 public class DockerConfig implements Config {
 
+    static final DockerConfig INSTANCE = new DockerConfig();
+
+    private DockerConfig() {
+    }
+
     @Override
     public String getDBHost() {
         return "niffler-all-db";
@@ -25,12 +30,12 @@ public class DockerConfig implements Config {
 
     @Override
     public String getSpendUrl() {
-        return "niffler-spend";
+        return "http://niffler-spend:8093";
     }
 
     @Override
     public String getFrontUrl() {
-        return "http://niffler-frontend:3000";
+        return "http://niffler-frontend";
     }
 
     @Override
@@ -40,7 +45,7 @@ public class DockerConfig implements Config {
 
     @Override
     public String getCurrencyGrpcAddress() {
-        return "niffler-currency";
+        return "http://niffler-currency:8091";
     }
 
     @Override
@@ -55,7 +60,7 @@ public class DockerConfig implements Config {
 
     @Override
     public String getUserdataGrpcAddress() {
-        return "niffler-userdata";
+        return "http://niffler-userdata:8089";
     }
 
     @Override

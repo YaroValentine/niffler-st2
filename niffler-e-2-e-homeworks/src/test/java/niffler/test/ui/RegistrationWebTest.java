@@ -49,6 +49,6 @@ public class RegistrationWebTest extends BaseWebTest {
         Selenide.open(RegistrationPage.URL);
         page.checkThatPageLoaded()
                 .fillRegistrationForm("g", "12345", "12345")
-                .checkErrorMessage("Allowed username length should be from 3 to 12 characters");
+                .checkErrorMessage("Allowed username length should be from 3 to 50 characters");
     }
 }

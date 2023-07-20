@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @ExtendWith({
         AllureJunit5.class,
         BrowserExtension.class,
-        GenerateUserApiExtension.class,
+//        GenerateUserApiExtension.class,
         GenerateUserJdbcExtension.class,
         GenerateUserHibernateExtension.class,
         ApiLoginExtension.class,

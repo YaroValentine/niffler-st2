@@ -3,6 +3,11 @@ package niffler.config;
 
 public class LocalConfig implements Config {
 
+    static final LocalConfig INSTANCE = new LocalConfig();
+
+    private LocalConfig() {
+    }
+
     @Override
     public String getDBHost() {
         return "localhost";

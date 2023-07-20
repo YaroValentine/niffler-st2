@@ -3,10 +3,13 @@ package niffler.config;
 public interface Config {
 
     static Config getConfig() {
-        if ("docker".equals(System.getProperty("env"))) {
-            return new DockerConfig();
+        if ("docker".equals(System.getProperty("test.env"))) {
+            return DockerConfig.INSTANCE;
+        } else if ("local".equals(System.getProperty("test.env"))) {
+            return LocalConfig.INSTANCE;
+        } else {
+            throw new IllegalStateException("Unable to resolve 'test.env' System Property");
         }
-        return new LocalConfig();
     }
 
     String getDBHost();
